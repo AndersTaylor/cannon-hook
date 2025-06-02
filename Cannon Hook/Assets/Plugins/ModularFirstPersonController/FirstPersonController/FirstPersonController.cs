@@ -130,7 +130,7 @@ public class FirstPersonController : MonoBehaviour
     private float timer = 0;
 
     #endregion
-
+    
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -365,7 +365,7 @@ public class FirstPersonController : MonoBehaviour
     }
 
     void FixedUpdate()
-    {
+    { 
         #region Movement
 
         if (playerCanMove)
@@ -619,7 +619,7 @@ public class FirstPersonController : MonoBehaviour
         GUI.enabled = fpc.playerCanMove;
         fpc.walkSpeed = EditorGUILayout.Slider(new GUIContent("Walk Speed", "Determines how fast the player will move while walking."), fpc.walkSpeed, .1f, fpc.sprintSpeed);
         GUI.enabled = true;
-
+        
         EditorGUILayout.Space();
 
         #region Sprint
