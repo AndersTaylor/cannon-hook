@@ -483,7 +483,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   checkGroundedDistance: 0.4
-  moveSpeed: 10
+  moveSpeed: 7
   runAcceleration: 14
   runDeacceleration: 10
   airAcceleration: 2
