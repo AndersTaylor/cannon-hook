@@ -6,11 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="cfbda68f-14cc-404b-be34-902fa3ef4053" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Cannon Hook/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Cannon Hook/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/ModularFirstPersonController/FirstPersonController/FirstPersonController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Plugins/ModularFirstPersonController/FirstPersonController/FirstPersonController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/URP Sample/Scenes/Oasis/OasisScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Plugins/URP Sample/Scenes/Oasis/OasisScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/InputManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/InputManager.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/URP Sample/Scenes/Garden/GardenScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Plugins/URP Sample/Scenes/Garden/GardenScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Player v01.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Player v01.prefab" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,6 +100,7 @@
       <workItem from="1748784295921" duration="5070000" />
       <workItem from="1748872653026" duration="3962000" />
       <workItem from="1748892977814" duration="6796000" />
+      <workItem from="1748974330422" duration="817000" />
     </task>
     <servers />
   </component>
