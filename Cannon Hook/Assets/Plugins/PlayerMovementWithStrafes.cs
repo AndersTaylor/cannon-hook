@@ -1,7 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+
+//AT Input Manager settings are very important!
+// Horizontal and Vertical settings:
+// Gravity: 10, Sensitivity: 10, Snap: Yes, Invert: Yes
 
 public class PlayerMovementWithStrafes : MonoBehaviour
 {
@@ -46,7 +51,7 @@ public class PlayerMovementWithStrafes : MonoBehaviour
     //UI
 	private Vector3 lastPos;
 	private Vector3 moved;
-	[SerializeField] private Vector3 playerVel;
+	private Vector3 playerVel;
 	private float modulasSpeed;
 	private float zVelocity;
 	private float xVelocity;
@@ -80,6 +85,11 @@ public class PlayerMovementWithStrafes : MonoBehaviour
 		Cursor.lockState = CursorLockMode.Locked;
 	}
 
+    private void OnDrawGizmos()
+    {
+	    Gizmos.DrawWireSphere(new Vector3(transform.position.x, transform.position.y - 0.6f, transform.position.z), .5f);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -97,16 +107,21 @@ public class PlayerMovementWithStrafes : MonoBehaviour
 
 		#endregion
 
-		isGrounded = Physics.CheckSphere(groundCheck.position, checkGroundedDistance, groundMask);
-
+		RaycastHit ray;
+		isGrounded = Physics.SphereCast(transform.position, 0.5f, Vector3.down, out ray, .6f, groundMask);
+		//isGrounded = Physics.CheckSphere(groundCheck.position, checkGroundedDistance, groundMask);
+		
 		QueueJump();
 
 		/* Movement, here's the important part */
-		if (controller.isGrounded)
+		if (isGrounded)
+		//if (controller.isGrounded)
 			GroundMove();
-		else if (!controller.isGrounded)
+		//else if (!controller.isGrounded)
+		else if (!isGrounded)
 			AirMove();
-
+		
+		
 		// Move the controller
 		controller.Move(playerVelocity * Time.deltaTime);
 
@@ -157,8 +172,10 @@ public class PlayerMovementWithStrafes : MonoBehaviour
 	{
 		currentspeed = Vector3.Dot(playerVelocity, wishdir);
 		addspeed = wishspeed - currentspeed;
+		
 		if (addspeed <= 0)
 			return;
+		
 		accelspeed = accel * Time.deltaTime * wishspeed;
 		if (accelspeed > addspeed)
 			accelspeed = addspeed;
@@ -170,12 +187,14 @@ public class PlayerMovementWithStrafes : MonoBehaviour
 	//Execs when the player is in the air
 	public void AirMove()
 	{
+		Debug.Log("AirMove called");
+		
 		wishDir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 		wishDir = transform.TransformDirection(wishDir);
 
 		wishspeed = wishDir.magnitude;
 
-		wishspeed *= 7f;
+		wishspeed *= moveSpeed;
 
 		wishDir.Normalize();
 		moveDirectionNorm = wishDir;
@@ -186,14 +205,16 @@ public class PlayerMovementWithStrafes : MonoBehaviour
 			accel = airDeacceleration;
 		else
 			accel = airAcceleration;
-
+		
+		/*
 		// If the player is ONLY strafing left or right
 		if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") != 0)
 		{
 			if (wishspeed > sideStrafeSpeed)
 				wishspeed = sideStrafeSpeed;
-			accel = sideStrafeAcceleration;
+			//accel = sideStrafeAcceleration;
 		}
+		*/
 
 		Accelerate(wishDir, wishspeed, accel);
 
@@ -248,6 +269,7 @@ public class PlayerMovementWithStrafes : MonoBehaviour
 		*/
 	public void GroundMove()
 	{
+		Debug.Log("GroundMove called");
 		// Do not apply friction if the player is queueing up the next jump
 		if (!wishJump)
 			ApplyFriction(1.0f);
@@ -255,9 +277,11 @@ public class PlayerMovementWithStrafes : MonoBehaviour
 			ApplyFriction(0);
 
 		wishDir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+		
 		wishDir = transform.TransformDirection(wishDir);
 		wishDir.Normalize();
 		moveDirectionNorm = wishDir;
+		
 
 		wishspeed = wishDir.magnitude;
 		wishspeed *= moveSpeed;
@@ -284,7 +308,8 @@ public class PlayerMovementWithStrafes : MonoBehaviour
 			drop = 0f;
 
 			/* Only if the player is on the ground then apply friction */
-			if (controller.isGrounded)
+			//if (controller.isGrounded)
+			if(isGrounded)
 			{
 				control = speed < runDeacceleration ? runDeacceleration : speed;
 				drop = control * friction * Time.deltaTime * t;
